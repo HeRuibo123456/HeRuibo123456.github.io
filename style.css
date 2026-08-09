@@ -53,7 +53,6 @@ body {
 .navbar li a:hover {
     background-color: #34495e;
     color: #f1c40f;
-    transform: translateY(-2px);
 }
 
 /* ===== Hero：占满全屏，文字靠上靠左 ===== */
