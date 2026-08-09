@@ -1,0 +1,114 @@
+/* 非常感谢DeepSeek老师! */
+
+
+/* ===== 全局重置 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;                    /* 让 body 撑满全屏 */
+}
+
+body {
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background-color: #f5f7fa;
+    display: flex;
+    flex-direction: column;          /* 纵向排列：导航栏在上，hero在下 */
+}
+
+/* ===== 导航栏：占满整行 ===== */
+.navbar {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    padding: 12px 30px;
+    background-color: #2c3e50;
+    margin: 0;                       /* 去掉之前的 auto 居中 */
+    border-radius: 0;                /* 去掉圆角，撑满 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;                 /* 防止被压缩 */
+}
+
+/* ===== 导航栏每个链接 ===== */
+.navbar li a {
+    display: block;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+/* ===== 让"首页"靠左，其他靠右（可选） ===== */
+.navbar li:first-child {
+    margin-right: auto;              /* 首页左边顶格，其他项自动靠右 */
+}
+
+/* ===== 鼠标悬停效果 ===== */
+.navbar li a:hover {
+    background-color: #34495e;
+    color: #f1c40f;
+    transform: translateY(-2px);
+}
+
+/* ===== Hero：占满全屏，文字靠上靠左 ===== */
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;    /* 靠上（关键改动） */
+    align-items: flex-start;        /* 靠左 */
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    padding: 60px 60px;             /* 顶部留白加大，让内容不贴边 */
+    text-align: left;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    border-left: 4px solid #f1c40f;  /* 加个金色左边框，更精神 */
+    padding-left: 24px;
+    color: white;
+}
+
+.hero p {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    line-height: 1.8;
+    padding-left: 28px;             /* 和 h1 的左边框对齐 */
+}
+
+.hero .highlight {
+    color: #f1c40f;
+}
+
+/* ===== 手机适配 ===== */
+@media (max-width: 550px) {
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 12px 16px;
+    }
+    .navbar li:first-child {
+        margin-right: 0;             /* 手机上取消自动靠右 */
+    }
+    .navbar li a {
+        padding: 8px 14px;
+        font-size: 16px;
+    }
+    .hero h1 {
+        font-size: 32px;
+    }
+    .hero p {
+        font-size: 17px;
+        padding: 0 16px;
+    }
+}
