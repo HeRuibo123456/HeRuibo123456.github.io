@@ -34,6 +34,16 @@ footer {
     color: #8B94A3;
 }
 
+pre, code {
+    background-color: #1E1E1E;
+    color: #D4D4D4;
+    font-family: "Consolas";
+}
+
+a {
+    text-decoration: none;
+}
+
 .navbar {
     list-style-type: none;
     display: flex;
