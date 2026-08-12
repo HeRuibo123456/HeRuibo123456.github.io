@@ -26,6 +26,7 @@ h3 {
 }
 
 p {
+    text-indent: 30px;
     font-size: 20px;
     color:  #C8CED9;
 }
@@ -34,14 +35,22 @@ footer {
     color: #8B94A3;
 }
 
-pre, code {
+.source {
     background-color: #1E1E1E;
     color: #D4D4D4;
     font-family: "Consolas";
+    border-color: #FFFFFF;
+    border-style: solid;
+    border-width: 2px;
 }
 
 a {
     text-decoration: none;
+}
+
+.math {
+    display: inline-block;
+    font-family: "Cambria Math";
 }
 
 .navbar {
@@ -83,4 +92,20 @@ a {
 
 .hero * {
     margin-bottom: 7px;
+}
+
+.artlink {
+    width: 100%;
+    border-radius: 4px;
+    border-color: #ffffff;
+    display: flex;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.label {
+    border-radius: 5px;
+    background-color: #FFF3B0;
+    color: #000000;
+    font-size: 14px;
 }
