@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我的OI博客 | 题解与文章</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<ul class="navbar">
+		<li><a href="../">首页</a></li>
+		<li><a href="../template/">板子</a></li>
+		<li><a href="../posts/">题解与文章</a></li>
+		<li><a href="../about.html">关于...</a></li>
+	</ul>
+	<div class="hero">
+		<h1>P1775 石子合并（弱化版）</h1>
+		<h2>题目大意</h2>
+		<p>这道题讲的是有一堆石子，每相邻两堆石子可以合并，求最小的合并代价</p>
+		<h2>题目思路</h2>
+		<p>这道题可以用<b>区间 DP</b>来做</p>
+		<p>所谓区间DP，通常是由一个区间的状态转移到另一个区间。做此类的题目，一般都是有<b>"删除"/"插入"</b>之类的字眼。</p>
+		<p class="math">我们可以先设状态。设dp[i][j]为从第i堆石子合并到第j堆石子所用的最小合并代价,
+		sum(i, j)为从a[i]加到a[j]的总价值,则状态转移方程为dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] + sum(i, j));
+		。同时，我们可以发现，需要对区间[i,j]求和，所以我们可以用上前缀和优化。可以得到一个时间复杂度为O(n^3)的算法。</p>
+		<h2>代码</h2>
+		<pre class="source">
+#include&lt;iostream>
+#include&lt;cstring>
+#define MAX 302 
+using namespace std;
+
+int n, a[MAX], dp[MAX][MAX];
+
+int main() {
+	cin >> n;
+	for(int i = 1; i <= n; i++) {
+		cin >> a[i];
+		a[i] += a[i - 1];
+	}
+	memset(dp, 0x3F, sizeof(dp));
+	for(int i = 1; i <= n; i++) {
+		dp[i][i] = 0;
+	}
+	for(int i = 2; i <= n; i++) {
+		for(int l = 1; l <= n - i + 1; l++) {
+			int r = l + i - 1;
+			for(int j = l; j < r; j++) {
+				dp[l][r] = min(dp[l][r], dp[l][j] + dp[j + 1][r] + a[r] - a[l - 1]);
+			}
+		}
+	}
+	cout << dp[1][n] << endl;
+	return 0;
+}
+	</pre>
+	</div>
+	<footer>&copy; 2026 HeRuibo123456</footer>
+</body>
+</html>
