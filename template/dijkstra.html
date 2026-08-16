@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我的OI博客 | 板子</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<ul class="navbar">
+		<li><a href="../">首页</a></li>
+		<li><a href="../template/">板子</a></li>
+		<li><a href="../posts/">题解与文章</a></li>
+		<li><a href="../about.html">关于...</a></li>
+	</ul>
+	<div class="hero">
+		<h1>Dijkstra - 图的最短路算法</h1>
+		<pre class="source">
+#include&lt;iostream>
+#include&lt;algorithm>
+#include&lt;queue>
+#include&lt;climits>
+#include&lt;cstring>
+#include&lt;utility>
+#define MAX 100005
+#define INF1 0x3F
+#define INF2 0x3F3F3F3F
+#define pii pair&lt;int, int>
+using namespace std;
+
+vector&lt;pii> v[MAX];
+priority_queue&lt;pii, vector&lt;pii>, greater&lt;pii> > pq;
+int dist[MAX], n, m, s, u, v_, w;
+bool done[MAX];
+
+void dijkstra() {
+	memset(dist, INF1, sizeof(dist));
+	dist[s] = 0;
+	pq.push({0, s});
+	while(!pq.empty()) {
+		pii node = pq.top();
+		pq.pop();
+		if(done[node.second])
+			continue;
+		done[node.second] = true;
+		for(pii x : v[node.second]) {
+			if(dist[node.second] + x.first < dist[x.second]) {
+				dist[x.second] = dist[node.second] + x.first;
+				pq.push({dist[x.second], x.second});
+			}
+		}
+	}
+}
+
+int main() {
+	cin >> n >> m >> s;
+	for(int i = 1; i <= m; i++) {
+		cin >> u >> v_ >> w;
+		v[u].push_back({w, v_});
+	}
+	dijkstra();
+	for(int i = 1; i <= n; i++) {
+		if(dist[i] == INF2) {
+			cout << INT_MAX << ' ';
+		} else {
+			cout << dist[i] << ' ';
+		}
+	}
+	return 0;
+}
+	</div>
+	<footer>© 2026 HeRuibo123456</footer>
+</body>
+</html>
