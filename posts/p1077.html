@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我的OI博客 | 题解与文章</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<ul class="navbar">
+		<li><a href="../">首页</a></li>
+		<li><a href="../template/">板子</a></li>
+		<li><a href="../posts/">题解与文章</a></li>
+		<li><a href="../about.html">关于...</a></li>
+	</ul>
+	<div class="hero">
+		<h1>P1077 [NOIP 2012 普及组] 摆花</h1>
+		<h2>题目大意</h2>
+		<p class="math">有n种花要拿m桶，第i桶只能拿a<sub>i</sub>桶，求总方案数对10<sup>6</sup>+7取模</p>
+		<h2>题目思路</h2>
+		<p>本题是一道简单的计数题，这是我做过的第一道计数DP</p>
+		<p class="math">我们先设状态，设dp[i][j]表示前i种拿j桶的方案数，则状态转移方程为：
+			dp[i][j] = &#8721;dp[i - 1][j - k] mod 10<sup>6</sup>+7;
+		</p>
+		<p>所以这道题其实是非常简单的</p>
+		<h2>代码</h2>
+		<pre class="source">
+#include&lt;iostream>
+using namespace std;
+
+const int MAX = 102, mod = 1000007;
+int a[MAX], n, m, dp[MAX][MAX];
+
+int main () {
+	cin >> n >> m;
+	for(int i = 1; i <= n; i++) {
+		cin >> a[i];
+	}
+	
+	dp[0][0] = 1;
+	for(int i = 1; i <= n; i++) {
+		for(int j = 0; j <= m; j++) {
+			for(int k = 0; k <= min(j, a[i]); k++) {
+				dp[i][j] = (dp[i][j] + dp[i - 1][j - k]) % mod;
+			}
+		}
+	}
+	
+	cout << dp[n][m];
+	return 0;
+} 
+		</pre>
+	</div>
+	<footer>© 2026 HeRuibo123456</footer>
+</body>
+</html>
